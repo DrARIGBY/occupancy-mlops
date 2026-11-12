@@ -1,0 +1,26 @@
+# Model endpoint image (Task 3): uvicorn occupancy.service:app
+# The trained model is mounted at run time:
+#   docker run --rm -p 8000:8000 -v "$PWD/models:/app/models:ro" occupancy-serve
+FROM python:3.12-slim
+
+ENV OCC_MODEL_DIR=/app/models \
+    UVICORN_HOST=0.0.0.0 \
+    UVICORN_PORT=8000
+
+# XGBoost needs the OpenMP runtime.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+# Pinned dependencies first (cached layer), then the occupancy package itself.
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml ./
+COPY src ./src
+RUN pip install --no-cache-dir --no-deps .
+# Worked test example shipped with the image: docker run --rm occupancy-serve cat README_EXAMPLE.md
+COPY README_EXAMPLE.md ./
+
+EXPOSE 8000
+CMD ["uvicorn", "occupancy.service:app"]

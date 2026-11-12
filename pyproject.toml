@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "occupancy"
+dynamic = ["version", "dependencies"]
+description = "Room occupancy detection PoC: XGBoost training pipeline + FastAPI inference service"
+requires-python = ">=3.12,<3.13"
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "occupancy.__version__" }
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["Scripts/tests"]

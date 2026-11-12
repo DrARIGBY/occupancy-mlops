@@ -1,0 +1,15 @@
+# Local Python environment and caches - created by `make setup` / pytest, never committed
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+.pytest_cache/
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# data/raw/ and models/ ARE committed on purpose: the Docker images hold code only,
+# so this repository is where the data and the trained model come from.

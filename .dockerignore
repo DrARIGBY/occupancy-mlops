@@ -1,0 +1,9 @@
+# The images only need requirements.txt, pyproject.toml and src/; data and models are mounted at run time.
+.venv
+data/
+models/
+Scripts/
+.git
+**/__pycache__
+src/*.egg-info
+*.pptx
