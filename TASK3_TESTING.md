@@ -37,7 +37,7 @@ You need:
 ### Step 1: start from a fresh clone of the repository
 
 ```bash
-git clone <repository-url> /tmp/occupancy-check
+git clone https://github.com/DrARIGBY/occupancy-mlops.git /tmp/occupancy-check
 cd /tmp/occupancy-check
 ```
 
@@ -284,6 +284,6 @@ DOCKER_DEFAULT_PLATFORM=linux/amd64 OCC_TAG=v1 PUSH_REGISTRY=ghcr.io/<your-githu
 
 - **What it does:** `.github/workflows/ci.yml` runs the same `Scripts/ci_local.sh`:
   - **Every pull request and every push to `main`:** test → build → smoke test.
-  - **Pushes to `main`:** also pushes the tested images to `ghcr.io/<owner>`, tagged with the commit SHA, using GitHub's built-in token. No secret needs setting up.
+  - **Pushes to `main`:** also pushes the tested images to `ghcr.io/drarigby/occupancy-train` and `ghcr.io/drarigby/occupancy-serve`, tagged with the commit SHA, using GitHub's built-in token. No secret needs setting up.
 - **Why:** this makes Task 3 automatic. Every change is tested, and only tested images are published.
 - **Pass:** a green tick on the workflow run, and two packages under the repository's **Packages**. They start private; make them public in each package's settings.

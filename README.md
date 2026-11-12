@@ -196,11 +196,11 @@ Without make, run `bash Scripts/ci_local.sh` with the project venv active. The s
 
 ### Run the pipeline on GitHub
 
-GitHub reads workflows only from `.github/workflows/` at the repository root. To use this folder as its own repository, push it to GitHub with this folder as the root. Then:
+This repository is https://github.com/DrARIGBY/occupancy-mlops. GitHub runs `.github/workflows/ci.yml` from the repository root:
 
 - **Every pull request and every push to `main`** runs the pipeline: test → build → smoke test.
-- **Pushes to `main` also push the tested images** to GitHub Container Registry. They appear as `ghcr.io/<owner>/occupancy-train:<git-sha>` and `ghcr.io/<owner>/occupancy-serve:<git-sha>`. The workflow logs in with the built-in `GITHUB_TOKEN`, so no secret has to be set up.
-- **New GHCR packages are private.** To let others pull them, make them public in the package settings. Pull with `docker pull ghcr.io/<owner>/occupancy-serve:<git-sha>`.
+- **Pushes to `main` also push the tested images** to GitHub Container Registry. They appear as `ghcr.io/drarigby/occupancy-train:<git-sha>` and `ghcr.io/drarigby/occupancy-serve:<git-sha>`. The workflow logs in with the built-in `GITHUB_TOKEN`, so no secret has to be set up.
+- **New GHCR packages are private.** To let others pull them, make them public in the package settings. Pull with `docker pull ghcr.io/drarigby/occupancy-serve:<git-sha>`.
 
 ### Continuous training
 
